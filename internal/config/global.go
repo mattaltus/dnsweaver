@@ -115,6 +115,9 @@ type GlobalConfig struct {
 	ProxmoxTLSSkipVerify bool
 	ProxmoxTLSMinVersion string
 
+	// Caddy admin API source settings
+	CaddyAPIURL string // Caddy admin API base URL for the caddy-api source (e.g., http://localhost:2019)
+
 	// Incus settings
 	IncusURL          string   // Remote Incus API base URL (e.g., https://incus.example.com:8443)
 	IncusSocketPath   string   // Local Incus Unix socket path (e.g., /var/lib/incus/unix.socket)
@@ -485,6 +488,9 @@ func applyGlobalEnv(cfg *GlobalConfig) []*ConfigError {
 		// Invert polarity: VERIFY_TLS=true → TLS_SKIP_VERIFY=false
 		cfg.ProxmoxTLSSkipVerify = !cfg.ProxmoxVerifyTLS
 	}
+
+	// Caddy admin API source settings
+	cfg.CaddyAPIURL = getEnv("DNSWEAVER_CADDY_API_URL")
 
 	// Incus settings
 	cfg.IncusURL = getEnv("DNSWEAVER_INCUS_URL")

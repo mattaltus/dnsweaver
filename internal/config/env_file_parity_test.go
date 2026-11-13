@@ -126,6 +126,7 @@ func TestVirtualizationEnvironmentMatrixWithFile(t *testing.T) {
 		{"DNSWEAVER_INCUS_TLS_PIN_SHA256", "IncusTLSPinSHA256", "dummy-pin", "dummy-pin"},
 		{"DNSWEAVER_INCUS_TRUST_TOKEN", "IncusTrustToken", "dummy-trust-token", "dummy-trust-token"},
 		{"DNSWEAVER_INCUS_CERT_STORE", "IncusCertStore", "/fixture/cert-store", "/fixture/cert-store"},
+		{"DNSWEAVER_CADDY_API_URL", "CaddyAPIURL", "http://caddy:2019", "http://caddy:2019"},
 	} {
 		t.Run(tc.key, func(t *testing.T) {
 			clearAllEnv(t)

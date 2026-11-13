@@ -27,6 +27,7 @@ import (
 	"github.com/maxfield-allison/dnsweaver/providers/unifi"
 	"github.com/maxfield-allison/dnsweaver/providers/webhook"
 	"github.com/maxfield-allison/dnsweaver/sources/caddy"
+	"github.com/maxfield-allison/dnsweaver/sources/caddyapi"
 	dnsweaversource "github.com/maxfield-allison/dnsweaver/sources/dnsweaver"
 	incussource "github.com/maxfield-allison/dnsweaver/sources/incus"
 	k8ssource "github.com/maxfield-allison/dnsweaver/sources/kubernetes"
@@ -135,6 +136,21 @@ func registerSources(registry *source.Registry, cfg *config.Config, logger *slog
 			logger.Info("registered source",
 				slog.String("name", name),
 				slog.Bool("file_discovery", src.SupportsDiscovery()),
+			)
+		case "caddy-api":
+			if cfg.CaddyAPIURL() == "" {
+				return fmt.Errorf("caddy-api source requires DNSWEAVER_CADDY_API_URL (e.g. http://localhost:2019)")
+			}
+			src, err := caddyapi.New(cfg.CaddyAPIURL(), caddyapi.WithLogger(logger))
+			if err != nil {
+				return fmt.Errorf("configuring caddy-api source: %w", err)
+			}
+			if err := registry.Register(src); err != nil {
+				return fmt.Errorf("registering caddy-api source: %w", err)
+			}
+			logger.Info("registered source",
+				slog.String("name", name),
+				slog.String("url", cfg.CaddyAPIURL()),
 			)
 		case "nginx-proxy":
 			src := nginxproxy.New(nginxproxy.WithLogger(logger))

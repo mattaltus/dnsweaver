@@ -44,6 +44,14 @@ dnsweaver reads hostnames from seven **sources**. All seven are peers: enable an
 
     [:octicons-arrow-right-24: Caddy Labels](caddy.md)
 
+-   :material-api:{ .lg .middle } **Caddy Admin API**
+
+    ---
+
+    Read hostnames from a running Caddy server's config (Caddyfile or JSON).
+
+    [:octicons-arrow-right-24: Caddy Admin API](caddy-api.md)
+
 -   :simple-nginx:{ .lg .middle } **nginx-proxy Labels**
 
     ---
@@ -110,6 +118,7 @@ The value in the first column is what you put in `DNSWEAVER_SOURCES`.
 | :----- | :---- | :-------- | :------ |
 | `traefik` | `traefik.http.routers.*.rule` labels, plus `http.routers.*.rule` in Traefik dynamic config files | Docker, Swarm, Incus | `` Host(`app.example.com`) `` |
 | `caddy` | `caddy` / `caddy_<n>` labels from caddy-docker-proxy | Docker, Swarm, Incus | `caddy=app.example.com` |
+| `caddy-api` | `host` matchers in the running Caddy config, via the admin API | Any (no workloads) | `app.example.com { … }` |
 | `nginx-proxy` | `VIRTUAL_HOST` labels from jwilder/nginx-proxy | Docker, Swarm, Incus | `VIRTUAL_HOST=app.example.com` |
 | `dnsweaver` | Native `dnsweaver.*` labels, for explicit record configuration | Docker, Swarm, Incus | `dnsweaver.hostname=app.example.com` |
 | `kubernetes` | Ingress, IngressRoute, HTTPRoute, and Service resource specs | Kubernetes | `.spec.rules[].host` |

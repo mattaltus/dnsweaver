@@ -427,6 +427,11 @@ func (c *Config) UseIncus() bool {
 	return c.Global.IncusURL != "" || c.Global.IncusSocketPath != ""
 }
 
+// CaddyAPIURL returns the Caddy admin API base URL used by the caddy-api source.
+func (c *Config) CaddyAPIURL() string {
+	return c.Global.CaddyAPIURL
+}
+
 // IncusURL returns the remote Incus API base URL (empty for socket mode).
 func (c *Config) IncusURL() string {
 	return c.Global.IncusURL

@@ -286,7 +286,7 @@ world-readable inside the container, a real downgrade):
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `DNSWEAVER_SOURCES` | `traefik` | Comma-separated list: `traefik`, `caddy`, `nginx-proxy`, `dnsweaver`, `kubernetes`, `proxmox`, `incus` |
+| `DNSWEAVER_SOURCES` | `traefik` | Comma-separated list: `traefik`, `caddy`, `caddy-api`, `nginx-proxy`, `dnsweaver`, `kubernetes`, `proxmox`, `incus` |
 
 !!! warning "Deprecated Variable"
     `DNSWEAVER_SOURCE` (singular) is deprecated and will be removed in a future major release. Use `DNSWEAVER_SOURCES` (plural) instead.
@@ -301,6 +301,12 @@ world-readable inside the container, a real downgrade):
 | `DNSWEAVER_SOURCE_TRAEFIK_POLL_INTERVAL` | `60s` | File re-scan interval |
 | `DNSWEAVER_SOURCE_TRAEFIK_WATCH_METHOD` | `auto` | Watch method: `auto`, `inotify`, `poll` |
 | `DNSWEAVER_SOURCE_TRAEFIK_DEFAULT_ENTRYPOINTS` | *(none)* | Comma-separated entrypoints to assign to Traefik routers that declare none. Mirrors Traefik's [`asDefault`](https://doc.traefik.io/traefik/reference/install-configuration/entrypoints/#opt-asdefault) setting; required if you flag any entrypoint `asDefault = true` in Traefik so unlabeled routers don't become wildcards in dnsweaver. See [Traefik `asDefault` Entrypoints](../sources/swarm.md#traefik-asdefault-entrypoints). |
+
+### Caddy Admin API Source Settings
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `DNSWEAVER_CADDY_API_URL` | *(none, required)* | Base URL of the Caddy admin API, e.g. `http://caddy:2019`. See [Caddy Admin API](../sources/caddy-api.md). |
 
 ### Proxmox VE Source Settings
 
