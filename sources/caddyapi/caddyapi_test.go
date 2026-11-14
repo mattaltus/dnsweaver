@@ -202,7 +202,7 @@ func TestParseURL(t *testing.T) {
 	valid := map[string]string{
 		"http://localhost:2019":   "http://localhost:2019",
 		"http://localhost:2019/":  "http://localhost:2019",
-		" http://127.0.0.1:2019 ": "http://127.0.0.1:2019",
+		" http://127.0.0.1:2019 ": "http://127.0.0.1:2019", //nolint:gocritic // surrounding whitespace is under test
 		"https://caddy.lan:2019":  "https://caddy.lan:2019",
 		"http://[::1]:2019":       "http://[::1]:2019",
 	}
